@@ -1,0 +1,56 @@
+'''American Express  34 or 37  ->15 digit
+MasterCard 51, 52, 53, 54, or 55 ->16 digit
+Visa 4  -> 13 16 digit'''
+
+# check
+
+cnumber = input("Enter card number: ")
+lenc = len(cnumber)
+
+def checker(cnumber):
+    if cnumber.isdigit() == False:
+        cnumber = input("Enter card number: ")
+        return False
+
+    if lenc < 13:
+        print("INVALID")
+        return False
+
+    else:
+        return True
+
+if(checker(cnumber) == True):
+    # luh
+    totodd = list()
+    for i in range((lenc-2),-1,-2):
+        numberodd = int(cnumber[i])
+        luh = numberodd*2
+        ten = luh//10
+        pten = luh % 10
+        totodd.append(ten+pten)
+
+    sumodd = sum(totodd)
+
+    toteven = list()
+    for i in range((lenc-1), -1, -2):
+        toteven.append(int(cnumber[i]))
+
+    sumeven = sum(toteven)
+
+    fsum = sumodd+sumeven
+
+    if fsum % 10 != 0:
+        print("INVALID")
+
+    else:
+        if(lenc == 15 and cnumber[0] == "3" and cnumber[1] == "4" or cnumber[1] == "7" ):
+            print("AMEX")
+
+        elif(lenc == 16 and cnumber[0] == "5"and cnumber[1] == "1" or cnumber[1] == "2" or cnumber[1] == "3" or cnumber[1] == "4" or cnumber[1] == "5"):
+            print("MASTERCARD")
+
+        elif(lenc == 13 or lenc == 16 and cnumber[0] == "4"):
+            print("VISA")
+
+        else:
+            print("INVALID")
